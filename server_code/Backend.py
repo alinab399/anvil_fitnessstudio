@@ -28,3 +28,13 @@ def query_database_dict(query: str):
   return [dict(row) for row in result]
 
 
+@anvil.server.callable
+def get_studio_stats():
+  sql = "SELECT Studionr, COUNT(MitgliedId) as anzahl FROM Mitglied GROUP BY Studionr"
+  return anvil.server.call('query_database_dict', sql)
+
+@anvil.server.callable
+def get_all_studios():
+  sql = "SELECT * FROM Studio"
+  return anvil.server.call('query_database_dict', sql)
+

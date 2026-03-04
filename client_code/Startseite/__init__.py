@@ -5,10 +5,37 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import anvil.server
+from plotly import graph_objects as go
 
 class Startseite(StartseiteTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.aktualisiere_diagramm()
+    self.fill_datagrid_studios()
+    
+  def aktualisiere_diagramm(self):
+    stats = anvil.server.call('get_studio_stats')
+    studio_labels = [str(r['Studionr']) for r in stats]
+    mitglieder_counts = [r['anzahl'] for r in stats]
 
-    # Any code you write here will run before the form opens.
+    self.diagramm_auslastung.layout = {
+      'title': 'Mitglieder pro Studio',
+      'xaxis': {'title': 'Studio Nummer'},
+      'yaxis': {'title': 'Anzahl Mitglieder'}
+    }
+
+    self.diagramm_auslastung.data = [
+      go.Bar(
+        x = studio_labels,
+        y = mitglieder_counts,
+        marker = dict(color='#2196F3')
+      )
+    ]
+
+  def fill_datagrid_studios(self):
+    print(anvil.server.call('get_all_studios'))
+    self.data_grid_studios.items = anvil.server.call('get_all_studios')
+    
+
+    
