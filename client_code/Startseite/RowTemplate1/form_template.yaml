@@ -1,3 +1,10 @@
-components: []
+components:
+- event_bindings: {}
+  layout_properties: {column: OJLQEN}
+  name: button_more
+  properties:
+    text: |
+      Mehr
+  type: Button
 container: {type: DataRowPanel}
 is_package: true

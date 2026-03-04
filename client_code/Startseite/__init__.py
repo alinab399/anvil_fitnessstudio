@@ -12,7 +12,6 @@ class Startseite(StartseiteTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.aktualisiere_diagramm()
-    self.fill_datagrid_studios()
     
   def aktualisiere_diagramm(self):
     stats = anvil.server.call('get_studio_stats')
@@ -33,9 +32,4 @@ class Startseite(StartseiteTemplate):
       )
     ]
 
-  def fill_datagrid_studios(self):
-    print(anvil.server.call('get_all_studios'))
-    self.data_grid_studios.items = anvil.server.call('get_all_studios')
-    
-
-    
+  
