@@ -13,9 +13,9 @@ components:
     name: data_grid_studios
     properties:
       columns:
-      - {data_key: column_1, id: JKSDUP, title: Column 1}
-      - {data_key: column_2, id: VJQQOR, title: Column 2}
-      - {data_key: column_3, id: OJLQEN, title: Column 3}
+      - {data_key: studio_name, id: JKSDUP, title: Studio Name}
+      - {data_key: studio_address, id: VJQQOR, title: Adresse}
+      - {data_key: button_more, id: OJLQEN, title: ''}
     type: DataGrid
   layout_properties: {slot: default}
   name: content_panel
