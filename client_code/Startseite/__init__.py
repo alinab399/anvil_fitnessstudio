@@ -12,6 +12,7 @@ class Startseite(StartseiteTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.aktualisiere_diagramm()
+    self.fill_datagrid_studios()
     
   def aktualisiere_diagramm(self):
     stats = anvil.server.call('get_studio_stats')
@@ -31,5 +32,11 @@ class Startseite(StartseiteTemplate):
         marker = dict(color='#2196F3')
       )
     ]
+
+
+  def fill_datagrid_studios(self):
+    return_value = anvil.server.call('get_all_studios')
+    self.repeating_panel_studios.items = return_value
+    print(return_value)
 
   

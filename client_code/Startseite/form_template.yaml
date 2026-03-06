@@ -13,8 +13,8 @@ components:
     name: data_grid_studios
     properties:
       columns:
-      - {data_key: studio_name, id: JKSDUP, title: Studio Name}
-      - {data_key: studio_address, id: VJQQOR, title: Adresse}
+      - {data_key: Name, expand: false, id: JKSDUP, title: Studio Name}
+      - {data_key: Adresse, id: VJQQOR, title: Adresse}
       - {data_key: button_more, id: OJLQEN, title: ''}
     type: DataGrid
   layout_properties: {slot: default}

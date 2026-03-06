@@ -1,0 +1,26 @@
+components:
+- components:
+  - layout_properties: {grid_position: 'CXPXGK,AIHIZP'}
+    name: label_studio_address
+    properties: {}
+    type: Label
+  - layout_properties: {grid_position: 'BJMOAE,HWDZKR'}
+    name: plot_kurs
+    properties: {}
+    type: Plot
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- layout_properties: {slot: title}
+  name: label_studio_name
+  properties: {}
+  type: Label
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true
