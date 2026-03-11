@@ -23,10 +23,12 @@ class Studio(StudioTemplate):
     sql = """
       SELECT Kurs.Bezeichnung, COUNT(besucht.KursId) AS anzahl
       FROM Kurs
+      JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
       LEFT JOIN besucht ON Kurs.KursId = besucht.KursId
+      WHERE Trainer.Studionr = ?
       GROUP BY Kurs.Bezeichnung
     """
-    return_values = anvil.server.call('query_database_dict', sql)
+    return_values = anvil.server.call('query_database_dict', sql, row_dict['Studionr'])
     print(return_values)
     self.fuelle_diagramm(return_values)
     
@@ -42,21 +44,16 @@ class Studio(StudioTemplate):
       )
     ]
 
-    self.plot_kurs.layout = {
-      'title': 'Beliebte Kurse'
-    }
-
   def fuelle_datagridkurse(self, row_dict):
     sql = """
-    SELECT Kurs.Bezeichnung, Trainer.Name 
+    SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer 
     FROM Kurs
     JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
     WHERE Trainer.Studionr = ?
     """
 
     return_values = anvil.server.call('query_database_dict', sql, row_dict['Studionr'])
-    print()
-    print(return_values)
+  
 
     self.repeating_panel_kurse.items = return_values
     

@@ -1,13 +1,25 @@
 components:
 - components:
+  - layout_properties: {grid_position: 'PZEPSR,KMPVZB'}
+    name: label_2
+    properties: {bold: true, font_size: 15, text: 'Adresse:'}
+    type: Label
   - layout_properties: {grid_position: 'CXPXGK,AIHIZP'}
     name: label_studio_address
     properties: {}
+    type: Label
+  - layout_properties: {grid_position: 'CTOLGA,ACWNML'}
+    name: label_plot_title
+    properties: {bold: true, font_size: 15, text: 'Beliebte Kurse:'}
     type: Label
   - layout_properties: {grid_position: 'BJMOAE,HWDZKR'}
     name: plot_kurs
     properties: {}
     type: Plot
+  - layout_properties: {grid_position: 'NESYGD,UBIGTP'}
+    name: label_1
+    properties: {bold: true, font_size: 15, text: 'Übersicht aller Kurse:'}
+    type: Label
   - components:
     - name: repeating_panel_kurse
       properties: {item_template: Studio.RowTemplate2}
@@ -30,7 +42,7 @@ components:
   type: FlowPanel
 - layout_properties: {slot: title}
   name: label_studio_name
-  properties: {}
+  properties: {bold: true}
   type: Label
 container:
   properties: {html: '@theme:standard-page.html'}
