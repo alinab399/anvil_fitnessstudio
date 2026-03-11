@@ -17,6 +17,7 @@ class Studio(StudioTemplate):
     self.label_studio_name.text = row_dict['Name']
     self.label_studio_address.text = row_dict['Adresse']
     self.daten_diagramm_holen(row_dict)
+    self.fuelle_datagridkurse(row_dict)
 
   def daten_diagramm_holen(self, row_dict):
     sql = """
@@ -28,6 +29,7 @@ class Studio(StudioTemplate):
     return_values = anvil.server.call('query_database_dict', sql)
     print(return_values)
     self.fuelle_diagramm(return_values)
+    
 
   def fuelle_diagramm(self, return_values):
     mitglieder_counts = [str(r['anzahl']) for r in return_values]
@@ -43,3 +45,18 @@ class Studio(StudioTemplate):
     self.plot_kurs.layout = {
       'title': 'Beliebte Kurse'
     }
+
+  def fuelle_datagridkurse(self, row_dict):
+    sql = """
+    SELECT Kurs.Bezeichnung, Trainer.Name 
+    FROM Kurs
+    JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
+    WHERE Trainer.Studionr = ?
+    """
+
+    return_values = anvil.server.call('query_database_dict', sql, row_dict['Studionr'])
+    print()
+    print(return_values)
+
+    self.repeating_panel_kurse.items = return_values
+    

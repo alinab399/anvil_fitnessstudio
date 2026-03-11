@@ -8,6 +8,18 @@ components:
     name: plot_kurs
     properties: {}
     type: Plot
+  - components:
+    - name: repeating_panel_kurse
+      properties: {item_template: Studio.RowTemplate2}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'VRBUFO,FVFITE'}
+    name: data_grid_kurse
+    properties:
+      columns:
+      - {data_key: Bezeichnung, id: JKSDUP, title: Kurs}
+      - {data_key: Name, id: VJQQOR, title: Trainer}
+      - {data_key: Dauer, id: OJLQEN, title: Dauer}
+    type: DataGrid
   layout_properties: {slot: default}
   name: content_panel
   properties: {}

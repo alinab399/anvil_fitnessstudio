@@ -20,11 +20,11 @@ import sqlite3
 #
 
 @anvil.server.callable
-def query_database_dict(query: str):
+def query_database_dict(query: str, *args):
   with sqlite3.connect(data_files["fitness_studio.db"]) as conn:
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    result = cur.execute(query).fetchall()
+    result = cur.execute(query, args).fetchall()
   return [dict(row) for row in result]
 
 
