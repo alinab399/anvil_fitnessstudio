@@ -16,13 +16,20 @@ class Startseite(StartseiteTemplate):
     
   def aktualisiere_diagramm(self):
     stats = anvil.server.call('get_studio_stats')
-    studio_labels = [str(r['Studionr']) for r in stats]
+    print(stats)
+    studio_labels = [str(r['Name']) for r in stats]
     mitglieder_counts = [r['anzahl'] for r in stats]
 
     self.diagramm_auslastung.layout = {
       'title': 'Mitglieder pro Studio',
-      'xaxis': {'title': 'Studio Nummer'},
-      'yaxis': {'title': 'Anzahl Mitglieder'}
+      'xaxis': {
+        'title': 'Studio Name',
+        'type': 'category'
+      },
+      'yaxis': {
+        'title': 'Anzahl Mitglieder',
+        'dtick': 1 # nur ganze Zahlen
+      },
     }
 
     self.diagramm_auslastung.data = [
@@ -37,6 +44,6 @@ class Startseite(StartseiteTemplate):
   def fill_datagrid_studios(self):
     return_value = anvil.server.call('get_all_studios')
     self.repeating_panel_studios.items = return_value
-    print(return_value)
+    
 
   

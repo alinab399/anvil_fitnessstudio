@@ -30,7 +30,12 @@ def query_database_dict(query: str, *args):
 
 @anvil.server.callable
 def get_studio_stats():
-  sql = "SELECT Studionr, COUNT(MitgliedId) as anzahl FROM Mitglied GROUP BY Studionr"
+  sql = """
+  SELECT Studio.Name, COUNT(Mitglied.MitgliedId) as anzahl 
+  FROM Studio
+  LEFT JOIN Mitglied ON Studio.Studionr = Mitglied.Studionr
+  GROUP BY Studio.Name
+  """
   return anvil.server.call('query_database_dict', sql)
 
 @anvil.server.callable
