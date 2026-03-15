@@ -43,3 +43,24 @@ def get_all_studios():
   sql = "SELECT * FROM Studio"
   return anvil.server.call('query_database_dict', sql)
 
+@anvil.server.callable
+def get_all_kurse():
+  sql = """
+    SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer, Studio.Name AS Studio
+    FROM Kurs
+    JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
+    JOIN Studio ON Trainer.Studionr = Studio.Studionr
+    ORDER BY Kurs.Bezeichnung
+  """
+  return anvil.server.call('query_database_dict', sql)
+
+@anvil.server.callable
+def get_all_trainer():
+  sql = """
+    SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer, Studio.Name AS Studio
+    FROM Kurs
+    JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
+    JOIN Studio ON Trainer.Studionr = Studio.Studionr
+    ORDER BY Trainer.Name
+  """
+  return anvil.server.call('query_database_dict', sql)

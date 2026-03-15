@@ -56,4 +56,9 @@ class Studio(StudioTemplate):
   
 
     self.repeating_panel_kurse.items = return_values
+
+  @handle("button_back", "click")
+  def button_back_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    open_form('Startseite')
     

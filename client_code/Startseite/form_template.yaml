@@ -27,8 +27,28 @@ components:
   type: FlowPanel
 - layout_properties: {slot: title}
   name: label_1
-  properties: {text: Fitnessstudio}
+  properties: {bold: true, font_size: 22, text: Fitnessstudio}
   type: Label
+- components:
+  - event_bindings: {}
+    layout_properties: {grid_position: 'KIQSFV,JXCHXL'}
+    name: link_sudios
+    properties: {icon: 'fa:building', text: Studios}
+    type: Link
+  - event_bindings: {}
+    layout_properties: {grid_position: 'EAZOJV,JFYHGY'}
+    name: link_kurse
+    properties: {icon: 'fa:calendar-check-o', text: Kurse Überblick}
+    type: Link
+  - event_bindings: {}
+    layout_properties: {grid_position: 'PIOTFN,TWSGMK'}
+    name: link_trainer
+    properties: {icon: 'fa:user', text: Trainer Überblick}
+    type: Link
+  layout_properties: {slot: left-nav}
+  name: column_panel_1
+  properties: {visible: true}
+  type: ColumnPanel
 container:
   properties: {html: '@theme:standard-page.html'}
   type: HtmlTemplate

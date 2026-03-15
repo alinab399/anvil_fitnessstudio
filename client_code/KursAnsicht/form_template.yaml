@@ -1,0 +1,36 @@
+components:
+- components:
+  - components:
+    - name: repeating_panel_alleKurse
+      properties: {item_template: KursAnsicht.RowTemplate3}
+      type: RepeatingPanel
+    layout_properties: {grid_position: 'BNGSZF,DOAILU'}
+    name: data_grid_alleKurse
+    properties:
+      columns:
+      - {data_key: Bezeichnung, id: JKSDUP, title: Kurs}
+      - {data_key: Name, id: VJQQOR, title: Trainer}
+      - {data_key: Dauer, id: OJLQEN, title: Dauer}
+      - {data_key: Studio, id: SBGWGB, title: Studio}
+    type: DataGrid
+  layout_properties: {slot: default}
+  name: content_panel
+  properties: {}
+  type: ColumnPanel
+- layout_properties: {slot: nav-right}
+  name: navbar_links
+  properties: {}
+  type: FlowPanel
+- layout_properties: {slot: title}
+  name: label_1
+  properties: {bold: true, text: Alle Kurse im Überblick}
+  type: Label
+- event_bindings: {}
+  layout_properties: {slot: top-left-btn}
+  name: button_back
+  properties: {icon: 'fa:arrow-left', text: ''}
+  type: Button
+container:
+  properties: {html: '@theme:standard-page.html'}
+  type: HtmlTemplate
+is_package: true

@@ -28,15 +28,16 @@ class Startseite(StartseiteTemplate):
       },
       'yaxis': {
         'title': 'Anzahl Mitglieder',
-        'dtick': 1 # nur ganze Zahlen
-      },
+        'tickmode': 'auto'
+      }
     }
 
     self.diagramm_auslastung.data = [
       go.Bar(
         x = studio_labels,
         y = mitglieder_counts,
-        marker = dict(color='#2196F3')
+        marker = dict(color='#2196F3'),
+        text = mitglieder_counts
       )
     ]
 
@@ -44,6 +45,22 @@ class Startseite(StartseiteTemplate):
   def fill_datagrid_studios(self):
     return_value = anvil.server.call('get_all_studios')
     self.repeating_panel_studios.items = return_value
+
+  @handle("link_sudios", "click")
+  def link_sudios_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    self.data_grid_studios.scroll_into_view(smooth=True)
+
+  @handle("link_kurse", "click")
+  def link_kurse_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    open_form('KursAnsicht')
+
+  @handle("link_trainer", "click")
+  def link_trainer_click(self, **event_args):
+    """This method is called when the link is clicked"""
+    open_form('TrainerAnsicht')
+    
     
 
   
