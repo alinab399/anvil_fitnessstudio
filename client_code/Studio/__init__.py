@@ -40,7 +40,8 @@ class Studio(StudioTemplate):
     self.plot_kurs.data = [
       go.Pie(
         labels = kurs_bez,
-        values = mitglieder_counts
+        values = mitglieder_counts,
+        marker = dict(colors=['#8FCFF7','#8F96F7','#B38FF7','#CF8FF7','#E28FF7',])
       )
     ]
 
