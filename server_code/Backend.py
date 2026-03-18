@@ -84,3 +84,6 @@ def get_trainer_name_distinct():
     ORDER BY Name
   """
   return anvil.server.call('query_database_dict', sql)
+
+@anvil.server.callable
+
