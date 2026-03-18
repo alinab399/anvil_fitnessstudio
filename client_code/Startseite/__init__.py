@@ -36,7 +36,7 @@ class Startseite(StartseiteTemplate):
       go.Bar(
         x = studio_labels,
         y = mitglieder_counts,
-        marker = dict(color='#E08FF7'),
+        marker = dict(color='#CF8FF7'),
         text = mitglieder_counts
       )
     ]

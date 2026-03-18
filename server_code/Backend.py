@@ -44,23 +44,43 @@ def get_all_studios():
   return anvil.server.call('query_database_dict', sql)
 
 @anvil.server.callable
-def get_all_kurse():
+def get_all_kurse(value):
   sql = """
     SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer, Studio.Name AS Studio
     FROM Kurs
     JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
     JOIN Studio ON Trainer.Studionr = Studio.Studionr
+    WHERE Kurs.Bezeichnung = ?
     ORDER BY Kurs.Bezeichnung
+  """
+  return anvil.server.call('query_database_dict', sql, value)
+
+@anvil.server.callable
+def get_all_trainer(value):
+  sql = """
+    SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer, Studio.Name AS Studio
+    FROM Kurs
+    JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
+    JOIN Studio ON Trainer.Studionr = Studio.Studionr
+    WHERE Trainer.Name = ?
+    ORDER BY Trainer.Name
+  """
+  return anvil.server.call('query_database_dict', sql, value)
+
+@anvil.server.callable
+def get_kurse_bezeichnung_distinct():
+  sql = """
+    SELECT DISTINCT Bezeichnung
+    FROM Kurs
+    ORDER BY Bezeichnung
   """
   return anvil.server.call('query_database_dict', sql)
 
 @anvil.server.callable
-def get_all_trainer():
+def get_trainer_name_distinct():
   sql = """
-    SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer, Studio.Name AS Studio
-    FROM Kurs
-    JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
-    JOIN Studio ON Trainer.Studionr = Studio.Studionr
-    ORDER BY Trainer.Name
+    SELECT DISTINCT Name
+    FROM Trainer
+    ORDER BY Name
   """
   return anvil.server.call('query_database_dict', sql)
