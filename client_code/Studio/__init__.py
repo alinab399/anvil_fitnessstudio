@@ -20,16 +20,7 @@ class Studio(StudioTemplate):
     self.fuelle_datagridkurse(row_dict)
 
   def daten_diagramm_holen(self, row_dict):
-    sql = """
-      SELECT Kurs.Bezeichnung, COUNT(besucht.KursId) AS anzahl
-      FROM Kurs
-      JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
-      LEFT JOIN besucht ON Kurs.KursId = besucht.KursId
-      WHERE Trainer.Studionr = ?
-      GROUP BY Kurs.Bezeichnung
-    """
-    return_values = anvil.server.call('query_database_dict', sql, row_dict['Studionr'])
-    print(return_values)
+    return_values = anvil.server.call('get_diagramm_pie_data', row_dict)
     self.fuelle_diagramm(return_values)
     
 
@@ -46,16 +37,7 @@ class Studio(StudioTemplate):
     ]
 
   def fuelle_datagridkurse(self, row_dict):
-    sql = """
-    SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer 
-    FROM Kurs
-    JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
-    WHERE Trainer.Studionr = ?
-    """
-
-    return_values = anvil.server.call('query_database_dict', sql, row_dict['Studionr'])
-  
-
+    return_values = anvil.server.call('get_kurs_trainer_data', row_dict)
     self.repeating_panel_kurse.items = return_values
 
   @handle("button_back", "click")

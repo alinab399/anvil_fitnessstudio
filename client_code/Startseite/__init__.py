@@ -40,8 +40,7 @@ class Startseite(StartseiteTemplate):
         text = mitglieder_counts
       )
     ]
-
-
+    
   def fill_datagrid_studios(self):
     return_value = anvil.server.call('get_all_studios')
     self.repeating_panel_studios.items = return_value

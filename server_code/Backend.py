@@ -86,4 +86,23 @@ def get_trainer_name_distinct():
   return anvil.server.call('query_database_dict', sql)
 
 @anvil.server.callable
+def get_diagramm_pie_data(row_dict):
+  sql = """
+      SELECT Kurs.Bezeichnung, COUNT(besucht.KursId) AS anzahl
+      FROM Kurs
+      JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
+      LEFT JOIN besucht ON Kurs.KursId = besucht.KursId
+      WHERE Trainer.Studionr = ?
+      GROUP BY Kurs.Bezeichnung
+    """
+  return anvil.server.call('query_database_dict', sql, row_dict['Studionr'])
 
+@anvil.server.callable
+def get_kurs_trainer_data(row_dict):
+  sql = """
+    SELECT Kurs.Bezeichnung, Trainer.Name, Kurs.Dauer 
+    FROM Kurs
+    JOIN Trainer ON Kurs.Personalnr = Trainer.Personalnr
+    WHERE Trainer.Studionr = ?
+    """
+  return anvil.server.call('query_database_dict', sql, row_dict['Studionr'])
