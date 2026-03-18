@@ -12,6 +12,8 @@ class KursAnsicht(KursAnsichtTemplate):
     self.init_components(**properties)
     self.filldatagrid()
     # Any code you write here will run before the form opens.
+    return_value = anvil.server.call('get_all_kurse')
+    self.drop_down_KursAnsicht.items = return_value['Bezeichnung']
 
   def filldatagrid(self):
     self.repeating_panel_alleKurse.items = anvil.server.call('get_all_kurse')
@@ -20,3 +22,8 @@ class KursAnsicht(KursAnsichtTemplate):
   def button_back_click(self, **event_args):
     """This method is called when the button is clicked"""
     open_form('Startseite')
+
+  @handle("drop_down_KursAnsicht", "change")
+  def drop_down_KursAnsicht_change(self, **event_args):
+    """This method is called when an item is selected"""
+    
